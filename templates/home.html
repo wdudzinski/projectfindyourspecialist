@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: black;
+   color: white;
+   text-align: center;
+}
+</style>
+</head>
+<body>
+<form>
+    <td>
+        {% if user.is_authenticated %}
+            gratulacje wszedłeś na pustą stronę, a w dodatku musiałeś się zalogować!!!!!!!!
+            <a href="/logout/">Wyloguj</a>
+        {% else %}
+            nop nop nop
+            <a href="/login/">Zaloguj</a>
+        {% endif %}
+    </td>
+</form>
+
+<a href="/customerboard/">Customer Board</a>
+<a href="/specialistboard/">Specialist Board</a>
+
+</body>
+<div class="footer">
+  <p>
+      {{ user }}
+  </p>
+</div>
+</html>
