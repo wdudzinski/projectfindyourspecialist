@@ -23,10 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^login/', LoginView.as_view(), name="login"),
     url(r'^logout/', LogoutView.as_view(), name="logout"),
-    url(r'^home/', HomePageView.as_view(), name="home"),
+    url(r'^$', HomePageView.as_view(), name="home"),
     url(r'^specialistboard/', SpecialistBoardView.as_view(), name="specialistboard"),
     url(r'^customerboard/', CustomerBoardView.as_view(), name="customerboard"),
     url(r'^addcustomeroffer', AddCustomerOfferView.as_view(), name="addcustomeroffer"),
     url(r'^addspecialistoffer', AddSpecialistOfferView.as_view(), name="addspecialistoffer"),
-    url(r'^')
+    # url(r'^')
 ]

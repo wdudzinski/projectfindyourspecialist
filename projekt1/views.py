@@ -26,7 +26,7 @@ class LoginView(View):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/homepage/')
+                return HttpResponseRedirect('/')
             else:
                 return "Nieprawidłowe dane"
 

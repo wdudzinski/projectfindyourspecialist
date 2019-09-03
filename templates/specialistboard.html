@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Specialist Board</title>
-</head>
+{% extends 'home.html' %}
+{% block title %} Specialist Board
+{% endblock %}
+{% block content %}
+<h1>Specialist Board</h1>
 <br>
-<body>
-    {% for offer in customer_offers %}
+<h2>Offers:</h2>
+    {% for offer in specialist_offers %}
         {{ offer }}
     {% endfor %}
-</body>
-</html>
+{% endblock %}

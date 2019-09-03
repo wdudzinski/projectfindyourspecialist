@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>{% block title %} Home {% endblock %}</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  background: black;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: yellowgreen;
+}
+
+.main {
+  margin-left: 140px; /* Same width as the sidebar + left position in px */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .footer {
@@ -15,21 +58,23 @@
 </style>
 </head>
 <body>
-<form>
-    <td>
-        {% if user.is_authenticated %}
-            gratulacje wszedłeś na pustą stronę, a w dodatku musiałeś się zalogować!!!!!!!!
-            <a href="/logout/">Wyloguj</a>
-        {% else %}
-            nop nop nop
-            <a href="/login/">Zaloguj</a>
-        {% endif %}
-    </td>
-</form>
-
-<a href="/customerboard/">Customer Board</a>
-<a href="/specialistboard/">Specialist Board</a>
-
+<div class="sidenav">
+  <a>
+     <form>
+            {% if user.is_authenticated %}
+                <a href="/logout/">Wyloguj</a>
+            {% else %}
+                <a href="/login/">Zaloguj</a>
+            {% endif %}
+    </form>
+  </a>
+  <a href="/customerboard/">Customer Board</a>
+  <a href="/specialistboard/">Specialist Board</a>
+</div>
+<div class="main">
+  {%  block content %}
+    {%  endblock %}
+</div>
 </body>
 <div class="footer">
   <p>
