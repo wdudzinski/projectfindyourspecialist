@@ -1,8 +1,9 @@
 {% extends 'home.html' %}
 {% block content %}
+    <h1>Add User</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="zaloguj">
+    <input type="submit" value="add user">
 </form>
 {% endblock %}

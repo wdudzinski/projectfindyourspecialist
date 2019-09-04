@@ -2,10 +2,23 @@
 {% block title %} Customer Board
 {% endblock %}
 {% block content %}
-<h1>Specialist Board</h1>
+<h1>Customer Board</h1>
 <br>
 <h2>Offers:</h2>
     {% for offer in customer_offers %}
-        {{ offer }}
+        <div class="offer">
+        <p>Speciality:
+        {{ offer.speciality }}
+        </p>
+        <p>Description:
+        {{ offer.description }}
+        </p>
+        <p> PLN/h:
+        {{ offer.price }}
+        </p>
+        <p>
+        {{ offer.date }}
+        </p>
+        </div>
     {% endfor %}
 {% endblock %}

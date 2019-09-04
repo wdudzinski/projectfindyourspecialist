@@ -1,84 +1,38 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %} Home {% endblock %}</title>
-<head>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
-
-.sidenav {
-  width: 130px;
-  position: fixed;
-  z-index: 1;
-  top: 20px;
-  left: 10px;
-  background: black;
-  overflow-x: hidden;
-  padding: 8px 0;
-}
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: yellowgreen;
-}
-
-.main {
-  margin-left: 140px; /* Same width as the sidebar + left position in px */
-  font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-</head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: black;
-   color: white;
-   text-align: center;
-}
-</style>
 </head>
 <body>
 <div class="sidenav">
-  <a>
-     <form>
+<br>
+    <a style="word-wrap: break-word" >{{ user }}</a>
+    <a>
             {% if user.is_authenticated %}
-                <a href="/logout/">Wyloguj</a>
+                <a href="/logout/">Log out</a>
             {% else %}
-                <a href="/login/">Zaloguj</a>
+                <a href="/login/">Log in</a>
             {% endif %}
-    </form>
-  </a>
-  <a href="/customerboard/">Customer Board</a>
-  <a href="/specialistboard/">Specialist Board</a>
+    </a>
+<br>
+    <a href="/register/">Register</a>
+<br>
+    <a href="/customerboard/">Customer Board</a>
+<br>
+    <a href="/specialistboard/">Specialist Board</a>
+<br>
+    <a href="/addspecialistoffer/">Add Specialist Offer</a>
+<br>
+    <a href="/addcustomeroffer/">Add Customer Offer</a>
+
 </div>
 <div class="main">
   {%  block content %}
     {%  endblock %}
 </div>
 </body>
-<div class="footer">
-  <p>
-      {{ user }}
-  </p>
-</div>
 </html>

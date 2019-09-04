@@ -6,6 +6,19 @@
 <br>
 <h2>Offers:</h2>
     {% for offer in specialist_offers %}
-        {{ offer }}
+        <div class="offer">
+        <p>Speciality:
+        {{ offer.speciality }}
+        </p>
+        <p>Description:
+        {{ offer.description }}
+        </p>
+        <p> PLN/h:
+        {{ offer.priceperhour }}
+        </p>
+        <p>
+        {{ offer.available_from }}
+        </p>
+        </div>
     {% endfor %}
 {% endblock %}

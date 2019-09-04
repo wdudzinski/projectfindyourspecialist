@@ -1,6 +1,14 @@
-<head>Add Specialist Offer</head>
+{% extends 'home.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Add Specialist Offer</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form }}
+    <br>{{ form.as_p }}<br>
     <input type="submit" value="Add offer">
 </form>
+{% else %}
+    <h1>You have to be registered user, to add offers.</h1>
+    <h2>Please <a href="/register/">create an account</a> or <a href="/login/">log in</a>.</h2>
+{% endif %}
+{% endblock %}

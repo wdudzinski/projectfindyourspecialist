@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from django.conf.urls import url
 from projekt1.views import LoginView, LogoutView, HomePageView, SpecialistBoardView, CustomerBoardView,\
-    AddCustomerOfferView, AddSpecialistOfferView
+    AddCustomerOfferView, AddSpecialistOfferView, AddUserView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +28,7 @@ urlpatterns = [
     url(r'^$', HomePageView.as_view(), name="home"),
     url(r'^specialistboard/', SpecialistBoardView.as_view(), name="specialistboard"),
     url(r'^customerboard/', CustomerBoardView.as_view(), name="customerboard"),
-    url(r'^addcustomeroffer', AddCustomerOfferView.as_view(), name="addcustomeroffer"),
-    url(r'^addspecialistoffer', AddSpecialistOfferView.as_view(), name="addspecialistoffer"),
-    # url(r'^')
-]
+    url(r'^addcustomeroffer/', AddCustomerOfferView.as_view(), name="addcustomeroffer"),
+    url(r'^addspecialistoffer/', AddSpecialistOfferView.as_view(), name="addspecialistoffer"),
+    url(r'^register/', AddUserView.as_view(), name="adduser"),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

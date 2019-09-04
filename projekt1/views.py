@@ -4,7 +4,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import SpecialistOffer, CustomerOffer
-from .forms import LoginViewForm, AddCustomerOfferForm, AddSpecialistOfferForm
+from .forms import LoginViewForm, AddCustomerOfferForm, AddSpecialistOfferForm, AddUserForm
 
 
 class HomePageView(View):
@@ -57,18 +57,14 @@ class AddSpecialistOfferView(View):
     def post(self, request):
         form = AddSpecialistOfferForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
             speciality = form.cleaned_data['speciality']
             description = form.cleaned_data['description']
             priceperhour = form.cleaned_data['priceperhour']
             available_from = form.cleaned_data['available_from']
-            available_to = form.cleaned_data['available_to']
-            so = SpecialistOffer.objects.create(name=name,
-                                                speciality=speciality,
+            so = SpecialistOffer.objects.create(speciality=speciality,
                                                 description=description,
                                                 priceperhour=priceperhour,
-                                                available_from=available_from,
-                                                available_to=available_to)
+                                                available_from=available_from)
             return HttpResponseRedirect(f"/specialistoffer/{so.id}")
         return render(request, 'addspecialistoffer.html', {'form': form})
 
@@ -81,14 +77,36 @@ class AddCustomerOfferView(View):
     def post(self, request):
         form = AddCustomerOfferForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
             speciality = form.cleaned_data['speciality']
             description = form.cleaned_data['description']
             price = form.cleaned_data['price']
-            co = SpecialistOffer.objects.create(name=name,
-                                                speciality=speciality,
-                                                description=description,
-                                                price=price)
+            co = CustomerOffer.objects.create(speciality=speciality,
+                                              description=description,
+                                              price=price)
             return HttpResponseRedirect(f"/customeroffer/{co.id}")
         return render(request, 'addcustomeroffer.html', {'form': form})
+
+
+class AddUserView(View):
+    def get(self, request):
+        form = AddUserForm()
+        return render(request, 'adduser.html', {'form':form})
+
+    def post(self, request):
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            passwordconfirm = form.cleaned_data.get('passwordconfirm')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            if password == passwordconfirm:
+                u=User.objects.create(username=username, first_name=first_name, last_name=last_name, email=email)
+                u.set_password(password)
+                u.save()
+                return HttpResponseRedirect('/login')
+            else:
+                return HttpResponse("Nieprawidłowe dane!")
+
 
