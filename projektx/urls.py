@@ -19,16 +19,20 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.conf.urls import url
 from projekt1.views import LoginView, LogoutView, HomePageView, SpecialistBoardView, CustomerBoardView,\
-    AddCustomerOfferView, AddSpecialistOfferView, AddUserView
+    AddCustomerOfferView, AddSpecialistOfferView, AddUserView, SpecialistOfferDetailsView, CustomerOfferDetailsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^login/', LoginView.as_view(), name="login"),
-    url(r'^logout/', LogoutView.as_view(), name="logout"),
+    url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^logout/$', LogoutView.as_view(), name="logout"),
     url(r'^$', HomePageView.as_view(), name="home"),
-    url(r'^specialistboard/', SpecialistBoardView.as_view(), name="specialistboard"),
-    url(r'^customerboard/', CustomerBoardView.as_view(), name="customerboard"),
-    url(r'^addcustomeroffer/', AddCustomerOfferView.as_view(), name="addcustomeroffer"),
-    url(r'^addspecialistoffer/', AddSpecialistOfferView.as_view(), name="addspecialistoffer"),
-    url(r'^register/', AddUserView.as_view(), name="adduser"),
+    url(r'^specialistboard/$', SpecialistBoardView.as_view(), name="specialistboard"),
+    url(r'^customerboard/$', CustomerBoardView.as_view(), name="customerboard"),
+    url(r'^addcustomeroffer/$', AddCustomerOfferView.as_view(), name="addcustomeroffer"),
+    url(r'^addspecialistoffer/$', AddSpecialistOfferView.as_view(), name="addspecialistoffer"),
+    url(r'^register/$', AddUserView.as_view(), name="adduser"),
+    url(r'^specialistoffer/$', SpecialistOfferDetailsView.as_view()),
+    url(r'^customeroffer/$', CustomerOfferDetailsView.as_view()),
+    url(r'^customeroffer/(?P<customeroffer_id>(\d)+)$', CustomerOfferDetailsView.as_view()),
+    url(r'^specialistoffer/(?P<specialistoffer_id>(\d)+)$', SpecialistOfferDetailsView.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

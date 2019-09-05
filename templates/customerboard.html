@@ -6,19 +6,25 @@
 <br>
 <h2>Offers:</h2>
     {% for offer in customer_offers %}
-        <div class="offer">
-        <p>Speciality:
-        {{ offer.speciality }}
-        </p>
-        <p>Description:
-        {{ offer.description }}
-        </p>
-        <p> PLN/h:
-        {{ offer.price }}
-        </p>
-        <p>
-        {{ offer.date }}
-        </p>
-        </div>
+        <a class="offer1" href="/customeroffer/{{ offer.id }}">
+            <div class="offer">
+                <p>Speciality:
+                    {{ offer.speciality }}
+                </p>
+                <p>Description:
+                    {{ offer.description }}
+                </p>
+                <p> PLN/h:
+                    {{ offer.price }}
+                </p>
+                <p>Date Added:
+                    {{ offer.date }}
+                </p>
+                <a>
+                    {{ offer.user }}
+                </a>
+            </div>
+        </a>
+        <br>
     {% endfor %}
 {% endblock %}

@@ -35,3 +35,13 @@ body {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+div.offer{
+    border-style: dashed;
+    border-width: 3px;
+    margin-right: 160px;
+}
+
+a.offer1{
+    color: black;
+}

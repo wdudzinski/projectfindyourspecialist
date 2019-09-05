@@ -64,7 +64,8 @@ class AddSpecialistOfferView(View):
             so = SpecialistOffer.objects.create(speciality=speciality,
                                                 description=description,
                                                 priceperhour=priceperhour,
-                                                available_from=available_from)
+                                                available_from=available_from,
+                                                user=request.user)
             return HttpResponseRedirect(f"/specialistoffer/{so.id}")
         return render(request, 'addspecialistoffer.html', {'form': form})
 
@@ -72,7 +73,7 @@ class AddSpecialistOfferView(View):
 class AddCustomerOfferView(View):
     def get(self, request):
         form = AddCustomerOfferForm()
-        return render(request, 'addspecialistoffer.html', {'form': form})
+        return render(request, 'addcustomeroffer.html', {'form': form})
 
     def post(self, request):
         form = AddCustomerOfferForm(request.POST)
@@ -82,9 +83,22 @@ class AddCustomerOfferView(View):
             price = form.cleaned_data['price']
             co = CustomerOffer.objects.create(speciality=speciality,
                                               description=description,
-                                              price=price)
+                                              price=price,
+                                              user=request.user)
             return HttpResponseRedirect(f"/customeroffer/{co.id}")
         return render(request, 'addcustomeroffer.html', {'form': form})
+
+
+class CustomerOfferDetailsView(View):
+    def get(self, request, customeroffer_id):
+        offer = CustomerOffer.objects.get(id=customeroffer_id)
+        return render(request, 'customerofferdetails.html', {'offer': offer})
+
+
+class SpecialistOfferDetailsView(View):
+    def get(self, request, specialistoffer_id):
+        offer = SpecialistOffer.objects.get(id=specialistoffer_id)
+        return render(request, 'specialistofferdetails.html', {'offer': offer})
 
 
 class AddUserView(View):
@@ -102,7 +116,7 @@ class AddUserView(View):
             last_name = form.cleaned_data.get('last_name')
             email = form.cleaned_data.get('email')
             if password == passwordconfirm:
-                u=User.objects.create(username=username, first_name=first_name, last_name=last_name, email=email)
+                u = User.objects.create(username=username, first_name=first_name, last_name=last_name, email=email)
                 u.set_password(password)
                 u.save()
                 return HttpResponseRedirect('/login')
@@ -110,3 +124,7 @@ class AddUserView(View):
                 return HttpResponse("Nieprawidłowe dane!")
 
 
+class UserProfileView(View):
+    def get(self, request, user_id):
+        user = SpecialistOffer.objects.get(id=user_id)
+        return render(request, 'userprofile.html', {'user': user})

@@ -6,19 +6,25 @@
 <br>
 <h2>Offers:</h2>
     {% for offer in specialist_offers %}
-        <div class="offer">
-        <p>Speciality:
-        {{ offer.speciality }}
-        </p>
-        <p>Description:
-        {{ offer.description }}
-        </p>
-        <p> PLN/h:
-        {{ offer.priceperhour }}
-        </p>
-        <p>
-        {{ offer.available_from }}
-        </p>
-        </div>
+        <a class="offer1" href="/specialistoffer/{{ offer.id }}">
+            <div class="offer">
+                <p>Speciality:
+                    {{ offer.speciality }}
+                </p>
+                <p>Description:
+                    {{ offer.description }}
+                </p>
+                <p> PLN/h:
+                    {{ offer.priceperhour }}
+                </p>
+                <p>
+                    {{ offer.available_from }}
+                </p>
+                <a>
+                    {{ offer.user }}
+                </a>
+            </div>
+        </a>
+        <br>
     {% endfor %}
 {% endblock %}
