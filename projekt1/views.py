@@ -122,9 +122,12 @@ class AddUserView(View):
                 return HttpResponseRedirect('/login')
             else:
                 return HttpResponse("Nieprawidłowe dane!")
+        else:
+            return render(request, 'adduser.html', {'form':form})
+
 
 
 class UserProfileView(View):
     def get(self, request, user_id):
-        user = SpecialistOffer.objects.get(id=user_id)
+        user = User.objects.get(id=user_id)
         return render(request, 'userprofile.html', {'user': user})

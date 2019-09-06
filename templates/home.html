@@ -10,7 +10,7 @@
 <body>
 <div class="sidenav">
 <br>
-    <a style="word-wrap: break-word" >{{ user }}</a>
+    <a href="/userprofile/{{ user.id }}" style="word-wrap: break-word" >{{ user }}</a>
     <a>
             {% if user.is_authenticated %}
                 <a href="/logout/">Log out</a>

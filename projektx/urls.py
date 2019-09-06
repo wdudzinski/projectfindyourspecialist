@@ -19,7 +19,9 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.conf.urls import url
 from projekt1.views import LoginView, LogoutView, HomePageView, SpecialistBoardView, CustomerBoardView,\
-    AddCustomerOfferView, AddSpecialistOfferView, AddUserView, SpecialistOfferDetailsView, CustomerOfferDetailsView
+    AddCustomerOfferView, AddSpecialistOfferView, AddUserView, SpecialistOfferDetailsView, \
+    CustomerOfferDetailsView, UserProfileView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,4 +37,5 @@ urlpatterns = [
     url(r'^customeroffer/$', CustomerOfferDetailsView.as_view()),
     url(r'^customeroffer/(?P<customeroffer_id>(\d)+)$', CustomerOfferDetailsView.as_view()),
     url(r'^specialistoffer/(?P<specialistoffer_id>(\d)+)$', SpecialistOfferDetailsView.as_view()),
+    url(r'^userprofile/(?P<user_id>(\d)+)$', UserProfileView.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
